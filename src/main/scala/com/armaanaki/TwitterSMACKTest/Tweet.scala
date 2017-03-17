@@ -1,4 +1,4 @@
-package com.armaanaki.TweetSMACKTest
+package com.armaanaki.TwitterSMACKTest
 
 import java.util.Date
 
