@@ -1,6 +1,7 @@
 /bin/
 /target/
 /project/target
+/project/project
 # OS generated files #
 ######################
 */.DS_Store
