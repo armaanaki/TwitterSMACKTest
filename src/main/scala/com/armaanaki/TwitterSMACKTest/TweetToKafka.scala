@@ -36,17 +36,9 @@ object TweetToKafka extends App {
       ), n)
     }
     .via(Producer.flow(producerSettings))
-    .map { result =>
-      val record = result.message.record
-      println(s"${record.topic}/${record.partition} ${result.offset}: ${record.value}" +
-        s"(${result.message.passThrough})")
-      result
-    }
     .runWith(Sink.ignore)
 
   terminateWhenDone(done)
-
-
 
   def terminateWhenDone(result: Future[Done]): Unit = {
     result.onComplete {
