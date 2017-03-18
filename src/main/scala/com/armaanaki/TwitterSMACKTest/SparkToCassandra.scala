@@ -8,9 +8,9 @@ import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import com.datastax.spark.connector.streaming._
 
-object SparkKafkaReader extends App {
+object SparkToCassandra extends App {
   if (args.length < 6) {
-    println("SparkKafkaReader <kafka brokers> <topics> <cassandra host> <cassandra port> <cassandra keyspace> <cassandra table>")
+    println("SparkToCassandra <kafka brokers> <topics> <cassandra host> <cassandra port> <cassandra keyspace> <cassandra table>")
     System.exit(1)
   }
 
@@ -42,8 +42,9 @@ object SparkKafkaReader extends App {
     Subscribe[String, Tweet](topic, kafkaProperties)
   )
 
-  kafkaStream.print()
-  //kafkaStream.map(_._value).saveToCassandra(cassandra_keyspace, cassandra_table)
+  val tweets = kafkaStream.map(_.value)
+  tweets.print()
+  tweets.saveToCassandra(cassandra_keyspace, cassandra_table)
 
   ssc.start()
   ssc.awaitTermination
