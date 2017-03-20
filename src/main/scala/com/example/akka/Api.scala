@@ -4,6 +4,7 @@ import akka.http.scaladsl.server.RouteConcatenation
 import ch.megard.akka.http.cors.CorsDirectives._
 import com.example.akka.add.AddService
 import com.example.akka.hello.HelloService
+import com.example.akka.tweet.TweetService
 import com.example.akka.swagger.SwaggerDocService
 
 /**
@@ -20,6 +21,7 @@ trait Api extends RouteConcatenation {
   val routes =
     cors() (new AddService(add).route ~
     new HelloService(hello).route ~
+    new TweetService(tweet).route ~
     new SwaggerDocService(system).routes)
 
 }

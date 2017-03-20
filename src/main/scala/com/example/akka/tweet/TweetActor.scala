@@ -1,16 +1,15 @@
-package com.example.akka.add
+package com.example.akka.tweet
 
 import akka.actor.{Actor, ActorLogging}
 
-object AddActor {
-  case class AddRequest(numbers: Array[Int])
-  case class AddResponse(sum: Int)
+object TweetActor {
+  case class Tweet(date: String, text: String)
 }
 
-class AddActor extends Actor with ActorLogging {
-  import AddActor._
+class TweetActor extends Actor with ActorLogging {
+  import TweetActor._
 
   def receive: Receive = {
-    case request: AddRequest => { sender ! AddResponse(request.numbers.reduce(_ + _)) }
+    case Tweet(date, text)  => { sender ! Tweet(s"$date", s"$text") }
   }
 }

@@ -3,6 +3,7 @@ package com.example.akka
 import akka.actor.{Props, ActorSystem}
 import com.example.akka.add.AddActor
 import com.example.akka.hello.HelloActor
+import com.example.akka.tweet.TweetActor
 
 /**
  * Core is type containing the ``system: ActorSystem`` member. This enables us to use it in our
@@ -41,4 +42,5 @@ trait CoreActors {
 
   val add = system.actorOf(Props[AddActor])
   val hello = system.actorOf(Props[HelloActor])
+  var tweet = system.actorOf(Props[TweetActor])
 }
